@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+* {
+    font-family: Roboto, Courier, monospace;
+
+    margin: 0px;
+    padding: 0px;
+}
+
+
+/* --------------- Root Settings --------------- */
+:root {
+  --dark-blue: #023e8a;
+  --light-blue: #0077b6;
+  --off-white: #fefae0;
+  --light-brown: #dda15e;
+  --dark-brown: #bc6c25;
+  --darker-brown: #9c591f;
+
+  background-color: var(--bg-color);
+}
+
+body {
+  background-color: whitesmoke;
+}
+
+
+/* --------------- Header --------------- */
+#header-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 25px;
+
+  background-color: #1e88e5;
+}
+
+/* --------------- Header >> Logo --------------- */
+#logo-header-div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
+
+#logo-grid {
+    width: 35px;
+    height: auto;
+}
+
+#logo-text {
+    font-size: 40px;
+    font-weight: bolder;
+    color: white;
+}
+
+/* --------------- Header >> Navigation --------------- */
+#navigation-header-div {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.navigation-btn {
+  background-color: #1e88e5;
+  color: white;
+
+  font-size: 25px;
+  font-weight: bolder;
+
+  height: 50px;
+  width: 140px;
+  border: none;
+  border-radius: 10px;
+
+  transition: background 0.3s ease;
+  
+}
+
+button:hover {
+  background-color: #1565c0;
+  cursor:pointer;
+}
+
+
+
+/* --------------- Compartments --------------- */
+#compartments-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding: 25px;
+}
+
+/* --------------- Compartments >> Description --------------- */
+.description-div {
+    font-size: 45px;
+    margin: 20px;
+}
+
+/* --------------- Compartments >> Compartment Grid --------------- */
+#compartments-grid-div {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto;
+    row-gap: 20px;
+    column-gap: 80px;
+}
+
+.single-compartment-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 120px;
+}
+
+.compartment-icon {
+    width: 120px;
+    height: auto;
+}
+
+.compartment-name {
+    text-align: center;
+    padding: 5px;
+    font-size: 20px;
+    font-weight: 600;
+}
