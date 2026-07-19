@@ -1,3 +1,22 @@
+// CREATE FUNCTIONS
+function btnSelectDeselect(button) {
+    button.classList.toggle('selected-btn');
+    button.classList.toggle('unselected-btn');
+
+    checkbox = document.querySelector('.comp-checkbox')
+    if (checkbox.checked) {
+        checkbox.checked = false
+    }
+}
+
+function compSelectDeselectAll(checkbox) {
+    compButtons = document.querySelectorAll('.compartment-icon')
+    compButtons.forEach(compButton => {
+        compButton.classList.toggle('selected-btn', checkbox.checked);
+        compButton.classList.toggle('unselected-btn', !checkbox.checked);
+    });
+}
+
 // CREATE THE HEADER DIV
 const headerDiv = document.createElement('div')
 headerDiv.id = 'header-div'
@@ -45,16 +64,20 @@ document.body.appendChild(headerDiv)
 
 
 
-// CREATE THE COMPARTMENTS DIV
+// CREATE THE MIDDLE DIV
+const middleDiv = document.createElement('div')
+middleDiv.id = 'middle-div'
+
+////// Create the compartment seleciton div
 const compartmentsDiv = document.createElement('div')
 compartmentsDiv.id = 'compartments-div'
 
-////// Create description div
+////////// Create description div
 const descriptionCompartmentsDiv = document.createElement('div')
-descriptionCompartmentsDiv.textContent = 'Select Compartments'
+descriptionCompartmentsDiv.textContent = '1. Select your favourite compartment(s)'
 descriptionCompartmentsDiv.className = 'description-div'
 
-////// Create div with boxes for each compartment
+////////// Create div with boxes for each compartment
 const compartments = {
     'Actin Patches': './icons/actin-patches.svg',
     'Eisosomes': './icons/eisosomes.svg',
@@ -80,10 +103,20 @@ for (const comp in compartments) {
     const singleCompartmentDiv = document.createElement('div')
     singleCompartmentDiv.className = 'single-compartment-div'
     
-    const compartmentImage = document.createElement('img')
-    compartmentImage.src = compartments[comp]
-    compartmentImage.className = 'compartment-icon'
+    //---------------------------------------------------------------------
+    const compartmentImage = document.createElement('button')
+    compartmentImage.className = 'compartment-icon unselected-btn'
 
+    compartmentImage.style.backgroundImage = `url(${compartments[comp]})`
+    compartmentImage.style.backgroundRepeat = 'no-repeat'
+    compartmentImage.style.width = '120px'
+    compartmentImage.style.height = '120px'
+
+    compartmentImage.addEventListener('click', (event) => {
+        btnSelectDeselect(event.currentTarget)
+    })
+    
+    //---------------------------------------------------------------------
     const compartmentName = document.createElement('div')
     compartmentName.textContent = comp
     compartmentName.className = 'compartment-name'
@@ -93,7 +126,20 @@ for (const comp in compartments) {
     compartmentsGridDiv.appendChild(singleCompartmentDiv)
 }
 
-compartmentsDiv.append(descriptionCompartmentsDiv, compartmentsGridDiv)
+
+////////// Create a button to select/deselect all compartments
+const compCheckbox = document.createElement('input')
+compCheckbox.className = 'comp-checkbox'
+compCheckbox.type = 'checkbox'
+compCheckbox.checked = false
+compCheckbox.addEventListener('change', (event) => {compSelectDeselectAll(event.currentTarget)})
+
+const checkboxLabel = document.createElement('label')
+checkboxLabel.className = 'checkbox-label'
+checkboxLabel.appendChild(compCheckbox);
+checkboxLabel.appendChild(document.createTextNode('Select All Compartments'));
+
+compartmentsDiv.append(descriptionCompartmentsDiv, compartmentsGridDiv, checkboxLabel)
 
 // CREATE THE STRAINS DIV
 const strainsDiv = document.createElement('div')

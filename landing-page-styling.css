@@ -79,7 +79,7 @@ body {
   
 }
 
-button:hover {
+.navigation-btn:hover {
   background-color: #1565c0;
   cursor:pointer;
 }
@@ -118,8 +118,19 @@ button:hover {
 }
 
 .compartment-icon {
-    width: 120px;
-    height: auto;
+    border: none;
+    border-radius: 35px;
+    background-color: white;
+    background-size: cover;
+    background-position: center;
+    filter: brightness(1) saturate(0.05);
+    transition: filter 0.2s ease;
+}
+
+.compartment-icon:hover, 
+.selected-btn {
+    filter: brightness(1.5) saturate(1);
+    cursor:pointer;
 }
 
 .compartment-name {
@@ -127,4 +138,21 @@ button:hover {
     padding: 5px;
     font-size: 20px;
     font-weight: 600;
+}
+
+/* --------------- Compartments >> Checkbox --------------- */
+.comp-checkbox {
+    transform: scale(1.5);
+    margin-right: 8px;
+}
+
+.checkbox-label {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    
+    font-size: 25px;
+
+    padding: 10px;
 }
