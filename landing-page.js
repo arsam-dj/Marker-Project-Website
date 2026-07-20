@@ -68,7 +68,7 @@ document.body.appendChild(headerDiv)
 const middleDiv = document.createElement('div')
 middleDiv.id = 'middle-div'
 
-////// Create the compartment seleciton div
+////// Create the compartment selection div
 const compartmentsDiv = document.createElement('div')
 compartmentsDiv.id = 'compartments-div'
 
@@ -109,8 +109,8 @@ for (const comp in compartments) {
 
     compartmentImage.style.backgroundImage = `url(${compartments[comp]})`
     compartmentImage.style.backgroundRepeat = 'no-repeat'
-    compartmentImage.style.width = '120px'
-    compartmentImage.style.height = '120px'
+    compartmentImage.style.width = '115px'
+    compartmentImage.style.height = '115px'
 
     compartmentImage.addEventListener('click', (event) => {
         btnSelectDeselect(event.currentTarget)
@@ -141,17 +141,56 @@ checkboxLabel.appendChild(document.createTextNode('Select All Compartments'));
 
 compartmentsDiv.append(descriptionCompartmentsDiv, compartmentsGridDiv, checkboxLabel)
 
-// CREATE THE STRAINS DIV
+
+////// Create the strain selection div
 const strainsDiv = document.createElement('div')
 strainsDiv.id = 'strains-div'
+
+////////// Create description div
+const descriptionStrainsDiv = document.createElement('div')
+descriptionStrainsDiv.textContent = '2. Select your favourite strain(s)'
+descriptionStrainsDiv.className = 'description-div'
+
+////////// Create explanation list
+const explanationStrainsList = document.createElement('ul')
+explanationStrainsList.id = 'strain-entry-rule-list'
+
+const ruleOne = document.createElement('li')
+ruleOne.className = 'strain-entry-rule'
+ruleOne.textContent = 'Multiple entries should be comma-separated.'
+
+const ruleTwo = document.createElement('li')
+ruleTwo.className = 'strain-entry-rule'
+ruleTwo.textContent = 'Systematic names (e.g., YAR019C), standard names (e.g., CDC15), and Strain IDs if known (e.g., tsa882) are all valid.'
+
+const ruleThree = document.createElement('li')
+ruleThree.className = 'strain-entry-rule'
+ruleThree.textContent = 'If you are entering an essential gene perturbation, append \'-26C\' or \'-37C\' to the end (e.g., YAR019C-26C, CDC15-37C, tsa882-37C).'
+
+explanationStrainsList.append(ruleOne, ruleTwo, ruleThree)
+
+////////// Create a textbox
+const strainTextbox = document.createElement('textarea')
+strainTextbox.id = 'strain-textbox'
+strainTextbox.defaultValue = 'YAR019C-26C, ELM1, tsa60-37C'
+
+////////// Create a button for loading data
+loadBtn = document.createElement('button')
+loadBtn.textContent = 'Load Data and Images'
+loadBtn.id = 'load-btn'
+
+strainsDiv.append(descriptionStrainsDiv, explanationStrainsList, strainTextbox, loadBtn)
+
+middleDiv.append(compartmentsDiv, strainsDiv)
+
+document.body.appendChild(middleDiv)
+
+
 
 // CREATE THE FOOTER DIV
 const footerDiv = document.createElement('div')
 footerDiv.id = 'footer-div'
+footerDiv.textContent = 'Boone & Andrews Labs @ University of Toronto'
 
-
-// ATTACH MAIN CONTAINERS TO THE DOCUMENT
-
-document.body.appendChild(compartmentsDiv)
-document.body.appendChild(strainsDiv)
 document.body.appendChild(footerDiv)
+

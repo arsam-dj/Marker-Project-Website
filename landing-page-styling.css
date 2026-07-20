@@ -32,7 +32,7 @@ body {
   justify-content: space-between;
   align-items: center;
 
-  padding: 25px;
+  padding: 22px;
 
   background-color: #1e88e5;
 }
@@ -85,36 +85,43 @@ body {
 }
 
 
-
-/* --------------- Compartments --------------- */
-#compartments-div {
+/* --------------- Middle Div --------------- */
+#middle-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 100px;
+}
+/* --------------- Middle Div >> Compartments/Strains --------------- */
+#compartments-div,
+#strains-div {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 
     padding: 25px;
 }
 
-/* --------------- Compartments >> Description --------------- */
+/* --------------- Middle Div >> Description --------------- */
 .description-div {
-    font-size: 45px;
-    margin: 20px;
+    font-size: 35px;
+    margin: 20px 20px 20px 0px;
 }
 
-/* --------------- Compartments >> Compartment Grid --------------- */
+/* --------------- Middle Div >> Compartments >> Compartment Grid --------------- */
 #compartments-grid-div {
     display: grid;
-    grid-template-columns: auto auto auto auto auto auto;
-    row-gap: 20px;
-    column-gap: 80px;
+    grid-template-columns: auto auto auto auto;
+    row-gap: 10px;
+    column-gap: 60px;
 }
 
 .single-compartment-div {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 120px;
+    width: 115px;
 }
 
 .compartment-icon {
@@ -140,7 +147,7 @@ body {
     font-weight: 600;
 }
 
-/* --------------- Compartments >> Checkbox --------------- */
+/* --------------- Middle Div >> Compartments >> Checkbox --------------- */
 .comp-checkbox {
     transform: scale(1.5);
     margin-right: 8px;
@@ -155,4 +162,64 @@ body {
     font-size: 25px;
 
     padding: 10px;
+}
+
+/* --------------- Middle Div >> Strains --------------- */
+#strain-entry-rule-list {
+    width: 560px;
+    margin: -10px 10px 15px 0px;
+}
+
+.strain-entry-rule {
+    margin: 10px;
+    font-size: 22px;
+}
+
+#strain-textbox {
+    width: 550px;
+    height: 200px;
+
+    font-size: 18px;
+
+    padding: 10px;
+}
+
+#load-btn {
+  background-color: #1e88e5;
+  color: white;
+
+  font-size: 25px;
+  font-weight: bolder;
+
+  margin-top: 30px;
+
+  height: 50px;
+  width: 420px;
+  border: none;
+  border-radius: 10px;
+
+  transition: background 0.3s ease;
+  
+}
+
+#load-btn:hover {
+  background-color: #1565c0;
+  cursor:pointer;
+}
+
+
+/* --------------- Footer Div --------------- */
+#footer-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 40px;
+
+    background-color: #1e88e5;
+    color: white;
+
+    font-size: larger;
+    font-weight: bolder;
+
 }
