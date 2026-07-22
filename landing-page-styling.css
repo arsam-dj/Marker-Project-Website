@@ -24,7 +24,7 @@ body {
   background-color: whitesmoke;
 }
 
-
+/* LANDING PAGE */
 /* --------------- Header --------------- */
 #header-div {
   display: flex;
@@ -222,4 +222,54 @@ body {
     font-size: larger;
     font-weight: bolder;
 
+}
+
+
+
+
+
+
+
+
+
+/* RESULTS PAGE */
+/* --------------- Middle Div --------------- */
+#results-middle-div {
+    display: flex;
+    flex-direction: column;
+}
+
+/* --------------- Middle Div >> Compartment Selector Div --------------- */
+#comp-selector {
+    display: flex;
+    flex-direction: row;
+    gap: 18px;
+
+    padding: 20px;
+}
+
+/* --------------- Middle Div >> Results View Div >> Drop Downs --------------- */
+#drop-down-div {
+    display: flex;
+    flex-direction: column;
+
+    padding: 20px;
+}
+
+.drop-down-label {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+
+    font-weight: bolder;
+    font-size: 20px;
+
+    padding: 0px 20px 20px 20px;
+}
+
+.drop-down {
+    font-size: 20px;
+
+    padding: 10px
 }
