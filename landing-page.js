@@ -19,6 +19,15 @@ const compartments = {
 }
 
 // CREATE FUNCTIONS
+function createButton(btnText, btnID = '', btnClass = '') {
+    const myBtn = document.createElement('button')
+    myBtn.textContent = btnText
+    if (btnID) {myBtn.id = btnID}
+    if (btnClass) {myBtn.className = btnClass}
+
+    return myBtn
+
+}
 function btnSelectDeselect(button) {
     if (button.classList.contains('results-comp-btn')) {
         compBtns = document.querySelectorAll('.compartment-icon')
@@ -66,6 +75,24 @@ function createDropDownMenu(selectionTextArray, labelText) {
     return label
 }
 
+function createStrainStats(divClass, spanOneText, spanTwoText, spanTwoID) {
+    const statDiv = document.createElement('div')
+    statDiv.className = divClass
+    const divSpanOne = document.createElement('span')
+    divSpanOne.textContent = spanOneText
+    const divSpanTwo = document.createElement('span')
+    divSpanTwo.textContent = spanTwoText
+    divSpanTwo.className = spanTwoID
+    statDiv.append(divSpanOne, divSpanTwo)
+
+    return statDiv
+}
+
+function backToLandingPage() {
+    document.body.replaceChildren()
+    createLandingPage()
+}
+
 function createLandingPage() {
     // CREATE THE HEADER DIV
     const headerDiv = document.createElement('div')
@@ -90,20 +117,9 @@ function createLandingPage() {
     const navigationHeaderDiv = document.createElement('div')
     navigationHeaderDiv.id = 'navigation-header-div'
 
-    const aboutNavigation = document.createElement('button')
-    aboutNavigation.textContent = 'About'
-    aboutNavigation.id = 'about-navigation'
-    aboutNavigation.className = 'navigation-btn'
-
-    const contactNavigation = document.createElement('button')
-    contactNavigation.textContent = 'Contact'
-    contactNavigation.id = 'contact-navigation'
-    contactNavigation.className = 'navigation-btn'
-
-    const downloadNavigation = document.createElement('button')
-    downloadNavigation.textContent = 'Download'
-    downloadNavigation.id = 'download-navigation'
-    downloadNavigation.className = 'navigation-btn'
+    const aboutNavigation = createButton('About', 'about-navigation', 'navigation-btn regular-button')
+    const contactNavigation = createButton('Contact', 'contact-navigation', 'navigation-btn regular-button')
+    const downloadNavigation = createButton('Download', 'download-navigation', 'navigation-btn regular-button')
 
     navigationHeaderDiv.append(aboutNavigation, contactNavigation, downloadNavigation)
 
@@ -136,9 +152,6 @@ function createLandingPage() {
         compartmentImage.className = 'compartment-icon unselected-btn'
 
         compartmentImage.style.backgroundImage = `url(${compartments[comp]})`
-        compartmentImage.style.backgroundRepeat = 'no-repeat'
-        compartmentImage.style.width = '115px'
-        compartmentImage.style.height = '115px'
 
         compartmentImage.addEventListener('click', (event) => {
             btnSelectDeselect(event.currentTarget)
@@ -200,12 +213,10 @@ function createLandingPage() {
     ////////// Create a textbox
     const strainTextbox = document.createElement('textarea')
     strainTextbox.id = 'strain-textbox'
-    strainTextbox.defaultValue = 'YAR019C-26C, ELM1, tsa60-37C'
+    strainTextbox.defaultValue = 'YAR019C-37C, ELM1, tsa60-26C'
 
     ////////// Create a button for loading data
-    loadBtn = document.createElement('button')
-    loadBtn.textContent = 'Load Data and Images'
-    loadBtn.id = 'load-btn'
+    const loadBtn = createButton('Load Data and Images', 'load-btn', 'regular-button')
     loadBtn.addEventListener('click', (event) => {createResultsPage()})
 
     strainsDiv.append(descriptionStrainsDiv, explanationStrainsList, strainTextbox, loadBtn)
@@ -258,6 +269,10 @@ function createResultsPage() {
     const resultsView = document.createElement('div')
     resultsView.id = 'results-view'
 
+    ////// Create the drop-downs + strain stats div
+    const dropDownsStats = document.createElement('div')
+    dropDownsStats.id = 'drop-downs-stats'
+
     ////////// Create the drop-downs div
     const dropDownDiv = document.createElement('div')
     dropDownDiv.id = 'drop-down-div'
@@ -267,13 +282,92 @@ function createResultsPage() {
     const dropDownDefectClass = createDropDownMenu(['Compartment', 'Cell'], 'Defect Class')
     const dropDownDefectType = createDropDownMenu(['Any', 'Many APs', 'Few APs', 'High Coverage', 'Low Coverage', 'Dispersed', 'Clustered', 'High Uniform', 'Low Uniform'], 'Defect Type')
 
-    dropDownDiv.append(dropDownStrain, dropDownCellCycle, dropDownDefectClass, dropDownDefectType)
-    resultsView.append(dropDownDiv)
+    const reloadDataBtn = createButton('Display', 'reload-btn', 'regular-button')
+    
 
+    dropDownDiv.append(dropDownStrain, dropDownCellCycle, dropDownDefectClass, dropDownDefectType, reloadDataBtn)
+    
+    ////////// Create the strain stats div
+    const strainStatsDiv = document.createElement('div')
+    strainStatsDiv.id = 'strain-stats-div'
+
+    const sigHitDiv = createStrainStats('stat-div', 'Significant Hit?', 'YES', 'sig-hit-yes')
+    const penetranceDiv = createStrainStats('stat-div', 'Penetrance: ', '38.6%', 'stat-result')
+    const percentileDiv = createStrainStats('stat-div', 'Percentile: ', '89th (HIGH)', 'percentile-result-high')
+    strainStatsDiv.append(sigHitDiv, penetranceDiv, percentileDiv)
+    
+    dropDownsStats.append(dropDownDiv, strainStatsDiv)
+
+    ////// Create the images + controls div
+    const imagesControls = document.createElement('div')
+    imagesControls.id = 'images-controls-div'
+
+    ////////// Create the images div
+    const imagesDiv = document.createElement('div')
+    imagesDiv.id = 'images-div'
+    
+    const fluorescence = document.createElement('img')
+    fluorescence.src = './other-graphics/fluorescent_crops.png'
+    fluorescence.className = 'cell-crops'
+    
+    const overlays = document.createElement('img')
+    overlays.src = './other-graphics/overlay_crops.png'
+    overlays.className = 'cell-crops'
+    
+    imagesDiv.append(fluorescence, overlays)
+    
+
+    ////////// Create the controls div
+    const controlsButtonsDiv = document.createElement('div')
+    controlsButtonsDiv.id = 'controls-buttons-div'
+
+    const changeImageButtons = document.createElement('div')
+    changeImageButtons.id = 'change-image-buttons'
+
+    const imageStackButtons = document.createElement('div')
+    imageStackButtons.id = 'image-stack-buttons'
+
+    const bothStacks = createButton('Both', 'both-stacks-btn', 'regular-button')
+    const compartmentStack = createButton('Compartment', 'compartment-stack-btn', 'regular-button')
+    const nuclearStack = createButton('Nucleus', 'nuclear-stack-btn', 'regular-button')
+
+    imageStackButtons.append(bothStacks, compartmentStack, nuclearStack)
+
+    const brightnessSliderDiv = document.createElement('div')
+    brightnessSliderDiv.id = 'brightness-slider-div'
+
+    const sliderDescription = document.createElement('span')
+    sliderDescription.textContent = 'Image Brightness: '
+
+    const brightnessSlider = document.createElement('input')
+    brightnessSlider.type = 'range'
+    brightnessSlider.min = 1
+    brightnessSlider.max = 10
+    brightnessSlider.value = 1
+    brightnessSlider.step = 1
+
+    brightnessSliderDiv.append(sliderDescription, brightnessSlider)
+
+    changeImageButtons.append(imageStackButtons, brightnessSliderDiv)
+    
+    const downloadBackButtons = document.createElement('div')
+    downloadBackButtons.id = 'download-back-buttons-div'
+    
+    const downloadButton = createButton('Download Data', 'data-download-button', 'regular-button')
+    const backButton = createButton('Back to Search', 'back-button', 'regular-button')
+    backButton.addEventListener('click', backToLandingPage)
+
+    downloadBackButtons.append(downloadButton, backButton)
+    
+    controlsButtonsDiv.append(changeImageButtons, downloadBackButtons)
+
+    imagesControls.append(imagesDiv, controlsButtonsDiv)
+
+
+    resultsView.append(dropDownsStats, imagesControls)
     resultsMiddleDiv.append(compSelector, resultsView)
     
-    document.body.append(resultsMiddleDiv)
-    document.body.append(footerDiv)
+    document.body.append(resultsMiddleDiv, footerDiv)
 }
 
 createLandingPage()
